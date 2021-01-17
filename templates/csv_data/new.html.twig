@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'product.titre'|trans({}, 'product') }}{% endblock %}
+{% block page_subtitle %} {{ 'product.sub_titre'|trans({}, 'product') }} {% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+
+    {{ include('csv_data/_form.html.twig') }}
+{#            <form method="post" action="{{ path('csv_data_new') }}" enctype="multipart/form-data">
+                <div class="modal-body">
+
+                    <input type="hidden" name="_method" value="GET">
+                    <input type="file" name="csv_filename">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save </button>
+                </div>
+            </form>#}
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {# {% include 'matiere/javascript.html.twig' %}#}
+{% endblock %}

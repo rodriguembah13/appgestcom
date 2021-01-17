@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OrderFournisseur{% endblock %}
+
+{% block body %}
+    <h1>Edit OrderFournisseur</h1>
+
+    {{ include('order_fournisseur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('order_fournisseur_index') }}">back to list</a>
+
+    {{ include('order_fournisseur/_delete_form.html.twig') }}
+{% endblock %}

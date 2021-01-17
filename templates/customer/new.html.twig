@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'customer.new'|trans({}, 'caisse') }}{% endblock %}
+{% block page_subtitle %} {% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+    {{ include('customer/_form.html.twig') }}
+
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {# {% include 'matiere/javascript.html.twig' %}#}
+{% endblock %}

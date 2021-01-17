@@ -1,0 +1,48 @@
+<script type="text/javascript">
+  /*  $('.close_alert').click(function () {
+        swal("Good job!", "You clicked the button!", "success")
+    });*/
+    if ($('.ded_alert').text()==='ok'){
+        if ($('.class_alert').text()==='error'){
+            swal($('.class_alert').text(), $('.message_alert').text(), "warning")
+        }else if ($('.class_alert').text()==='info'){
+            swal({
+                title: $('.class_alert').text(),
+                text: $('.message_alert').text(),
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-warning",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+                function(){
+                    swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                })
+        }else {
+            swal({
+                    title: $('.class_alert').text(),
+                    text: $('.message_alert').text(),
+                    type: "success"
+                });
+        }
+
+    }
+    //swal("Here's a message!")
+    //swal("Good job!", "You clicked the button!", "success")
+/*    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully'
+    })*/
+</script>

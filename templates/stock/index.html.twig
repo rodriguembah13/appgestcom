@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'stock.titre'|trans({}, 'stock') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="col-md-5">
+            {% form_theme form '@AdminLTE/layout/form-theme-horizontal.html.twig' %}
+            {{  form_row(form.customer) }}
+        </div>
+        <div class="btn-group pull-right col-md-7">
+            <a id="generate_cmde" class="btn btn-success btn-sm" href="#" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'titre.generate_order'|trans({}, 'order') }}</a>
+            <a id="generate_auto_cmde" class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i>{{ 'titre.generate_auto_order'|trans({}, 'order') }}</a>
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+    <br>
+    {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+        'boxtype' : 'success',
+        'solid' : 0,
+        }%}
+        {% block box_body %}
+    <table class="table" id="table_stock">
+        <thead>
+            <tr>
+                <th><input class='checkbox' type='checkbox' checked/></th>
+                <th>Product</th>
+                <th>Magasin</th>
+                <th>Quantity</th>
+                <th>Low_stock_quantity</th>
+                <th>UpdatedAt</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <td><input class='checkbox' type='checkbox' checked/></td>
+                <td>{{ stock.product }}</td>
+                <td>{{ stock.entrepot }}</td>
+                <td>{{ stock.quantity }}</td>
+                <td>{{ stock.lowStockQuantity }}</td>
+                <td>{{ stock.updatedAt ? stock.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ stock.createdAt ? stock.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="dropdown">
+
+                        <a href="#" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-arrow-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                   href="{{ path('stock_show',{'id':stock.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.show'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item" onclick='getItem_id({{ stock.id }})' href="#"
+                                   id="delete_" data-toggle="modal" data-target="#deleteModa"><i
+                                            class="fa fa-trash"></i>{{ 'button.delete'|trans({}, 'action') }}</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+  {% include 'stock/javascript.html.twig' %}
+{% endblock %}
+

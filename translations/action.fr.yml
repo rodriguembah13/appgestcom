@@ -1,0 +1,35 @@
+button:
+  new: Ajouter
+  edit: Editer
+  delete: Supprimer
+  import: Importer
+  export: Exporter
+  show: Detail
+  update: Modifier
+  cancel: Annuler
+  print: Imprimer
+  valide: Valider
+  search: Recherche
+  save: Enregistrer
+  decomposite: Decomposer
+  showfacture: Voir facture
+  printfacture: Imprimer la facture
+  add_matiere: Ajouter une matière
+  add_trimestre: Ajouter un trimestre
+  add_sequence: Ajouter une évaluation
+  next: Suivant
+  activer: Activer
+  desactiver: Desactiver
+  pointage: Pointage
+  edit_compte: 'Modifier le compte'
+inscription:
+  inscrire: Inscrire
+  sendsms: Envoyer un sms
+  sendmail: Envoyer un mail
+  absence: Absence
+  exclusion: Exclusion
+  transfert: Transférer
+  add_bourse: Ajouter une bourse
+  add_categorie_bourse: Ajouter une catégorie
+  certificat: 'Certificat de scolarite'
+

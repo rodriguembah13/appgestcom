@@ -1,0 +1,261 @@
+<script type="text/javascript">
+    $('#total').val(0);
+    //  $('#field_subtotal').disabled(true);
+    $("#field_reduction").keyup(function () {
+        var reduc=$("#field_reduction").val();
+        console.log($(this).val())
+        if ($("#field_subtotal").val() >= reduc){
+            $("#field_total").val($("#field_subtotal").val()-$(this).val());
+        }
+
+    });
+    $("#field_vat").keyup(function () {
+        var reduc=$("#field_vat").val();
+        console.log($(this).val())
+        if ($("#field_subtotal").val() >= reduc){
+            $("#field_total").val($("#field_subtotal").val()-$(this).val());
+        }
+
+    });
+    $('#form_customer').change(function () {
+        $.ajax({
+            url: "{{ path('entrepotgetproduct') }}",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_product: $('#form_customer option:selected').val(),
+            },
+            success: function (data) {
+                console.log(data[0])
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            },
+            error: function (err) {
+                alert("An error ocurred while loading data ...");
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            }
+        });
+    });
+    $('#add_line').click(function () {
+        //   if ($('#form_quantity').val()>=)
+        $.ajax({
+            url: "{{ path('entrepotgetproduct') }}",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_product: $('#form_product option:selected').val(),
+                id_entrepot: $('#form_customer option:selected').val(),
+            },
+            success: function (data) {
+                //  $("#table_depart").hide();
+                product = data[0];
+                console.log(product)
+                var qte = $('#form_quantity').val();
+                if ( qte>0) {
+                    var total = qte * product.salePrice;
+                    var idtd = "line_" + product.id;
+                    var prodid = product.id;
+                    var alltotal = total + parseInt($('#total').val());
+                    //inp.val(valeur)
+                    $('#totaltex').text(alltotal);
+                    $('#total').val(alltotal);
+                    $('#field_subtotal').val(alltotal);
+
+                    var table = $("#table_depart>tbody");
+                    $("#table_depart>tbody:last").append("<tr id='" + idtd + "'><td><input class='checkbox hidden' type='checkbox' checked><span class='hidden'>" + product.id + "</span></td><td>" + product.name + "</td><td>" + product.salePrice + "</td><td>" + qte + "</td><td>" + total + "</td><td><a onclick='removeRow(" + prodid + "," + total + ")' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></a></td></tr>");
+                    setTimeout(function () {
+                        $("#overlay").fadeOut(300);
+                    }, 500);
+                }
+
+            },
+            error: function (err) {
+                alert("An error ocurred while loading data ...");
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            }
+        });
+    });
+    $('#add_line_out').click(function () {
+        //   if ($('#form_quantity').val()>=)
+        $.ajax({
+            url: "{{ path('entrepotgetproductout') }}",
+            type: "GET",
+            dataType: "JSON",
+            data: {
+                id_product: $('#form_product option:selected').val(),
+                id_entrepot: $('#form_customer option:selected').val(),
+                quantity: $('#form_quantity').val(),
+            },
+            success: function (data) {
+                //  $("#table_depart").hide();
+                product = data[0];
+                console.log(product)
+                var qte = $('#form_quantity').val();
+                if ( qte>0) {
+                    var total = qte * product.salePrice;
+                    var idtd = "line_" + product.id;
+                    var prodid = product.id;
+                    var alltotal = total + parseInt($('#total').val());
+                    //inp.val(valeur)
+                    $('#totaltex').text(alltotal);
+                    $('#total').val(alltotal);
+                    $('#field_subtotal').val(alltotal);
+
+                    var table = $("#table_depart>tbody");
+                    $("#table_depart>tbody:last").append("<tr id='" + idtd + "'><td><input class='checkbox hidden' type='checkbox' checked><span class='hidden'>" + product.id + "</span></td><td>" + product.name + "</td><td>" + product.salePrice + "</td><td>" + qte + "</td><td>" + total + "</td><td><a onclick='removeRow(" + prodid + "," + total + ")' class='btn btn-sm btn-danger'><i class='fa fa-trash'></i></a></td></tr>");
+                    setTimeout(function () {
+                        $("#overlay").fadeOut(300);
+                    }, 500);
+                }
+
+            },
+            error: function (err) {
+                alert("An error ocurred while loading data ...");
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            }
+        });
+    });
+    function removeRow(id, total) {
+        line = "#line_" + id;
+        var alltotal = parseInt($('#total').val()) - total;
+        //inp.val(valeur)
+        $('#totaltex').text(alltotal);
+        $('#total').val(alltotal);
+        $(line).remove();
+    }
+
+    $('#save').click(function () {
+        jsonObj = [];
+        $("#table_depart>tbody input[type=checkbox]:checked").each(function () {
+            var row = $(this).closest('tr')[0];
+            var id = row.cells[0].children[1].innerText;
+            var quantity = row.cells[3].innerText;
+            item = {};
+            item['quantity'] = quantity;
+            item['id'] = id;
+            jsonObj.push(item)
+        });
+        //console.log(JSON.stringify({data:jsonObj}))
+        $.ajax({
+            url: "{{ path('savemouvement') }}",
+            type: "POST",
+            dataType: "JSON",
+            data: JSON.stringify({ob: jsonObj, entrepot: $('#form_customer').val()}),
+            success: function (data) {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            },
+            error: function (err) {
+                alert("An error ocurred while loading data ...");
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            }
+        });
+    });
+    $('#saveout').click(function () {
+        jsonObj = [];
+        $("#table_depart>tbody input[type=checkbox]:checked").each(function () {
+            var row = $(this).closest('tr')[0];
+            var id = row.cells[0].children[1].innerText;
+            var quantity = row.cells[3].innerText;
+            item = {};
+            item['quantity'] = quantity;
+            item['id'] = id;
+            jsonObj.push(item)
+        });
+        //console.log(JSON.stringify({data:jsonObj}))
+        $.ajax({
+            url: "{{ path('savemouvementout') }}",
+            type: "POST",
+            dataType: "JSON",
+            data: JSON.stringify({ob: jsonObj, entrepot: $('#form_customer').val()}),
+            success: function (data) {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            },
+            error: function (err) {
+                alert("An error ocurred while loading data ...");
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            }
+        });
+    });
+    $('#create_customer').click(function () {
+
+        item = {
+            "name": $('#customer_name').val(),
+            "phone": $('#customer_phone').val(),
+            "email": $('#customer_email').val()
+        };
+        /*   item['name']=$('#customer_name');
+           item['phone']=$('#customer_phone');
+            item['email']=$('#customer_email');*/
+        //console.log(JSON.stringify({data:jsonObj}))
+        $.ajax({
+            url: "{{ path('createcustomerajax') }}",
+            type: "POST",
+            dataType: "JSON",
+            data: JSON.stringify({ob: item}),
+            success: function (data) {
+                $('#close_delete_customer').click();
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            },
+            error: function (err) {
+                alert("An error ocurred while loading data ...");
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
+            }
+        });
+    });
+    function getItem_id(id) {
+        $("#item_id").val(id);
+        $("#item_name").text(id);
+        swal({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete this item?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function(){
+                $("#overlay").fadeIn(300);
+                $.ajax({
+                    url: "{{ path('mouvement_delete_ajax') }}",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        item_id: id,
+                    },
+                    success: function (data) {
+                        $("#overlay").fadeOut(300);
+                        swal("Deleted!", "Your item has been deleted.", "success");
+                        window.location.reload(true);
+                    },
+                    error: function (err) {
+                        $("#overlay").fadeOut(300);
+                        swal("Error!", "Une erreur s'est produite: erifier les parametres.", "error");
+                    }
+                });
+
+            })
+    }
+</script>
+
+
+

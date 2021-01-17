@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    function getItem_id(id) {
+        $("#item_id").val(id);
+        $("#item_name").text(id);
+        swal({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete this item?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
+            function(){
+                $("#overlay").fadeIn(300);
+                $.ajax({
+                    url: "{{ path('product_category_delete_ajax') }}",
+                    type: "GET",
+                    dataType: "JSON",
+                    data: {
+                        item_id: id,
+                    },
+                    success: function (data) {
+                        $("#overlay").fadeOut(300);
+                        swal("Deleted!", "Your item has been deleted.", "success");
+                        window.location.reload(true);
+                    },
+                    error: function (err) {
+                        $("#overlay").fadeOut(300);
+                        swal("Error!", "Une erreur s'est produite: erifier les parametres.", "error");
+                    }
+                });
+
+            })
+    }</script>
+

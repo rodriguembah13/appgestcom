@@ -1,0 +1,44 @@
+comptabilite:
+  titre: Gestion comptabilité
+  titre_paiement: Paiements scolarité
+  titre_mouvement_caisse: Mouvements caisse
+  titre_mouvement_scolarite: Mouvements Scolarité
+  titre_type_reccete: Types de recette
+  titre_recette: Recettes
+  titre_recette_new: Nouvelle recette
+  titre_type_depense: Types de depense
+  titre_depense: Depenses
+  titre_depense_new: Nouvelle depense
+  titre_bilan: Bilan d'encaissement
+  titre_insolvable: Insolvables
+  effectif: Effectif
+  total_encaissement: Total
+  titre_caisse: Caisse
+  detail_paiement: Detail paiement
+  date_debut: Date debut
+  date_fin: Date fin
+  deduire_bourse: Déduire bourse?
+  bourse: Bourses
+  classe_select: Veuillez choisir une classe
+  niveau_select: Veuillez choisir un niveau
+  eleve_select: Veuillez choisir un élève
+  table:
+    eleve: Élève
+    professeur: Professeur
+    classe: Classe
+    montant: Montant
+    montant_verse: Montant versé
+    total_scolarite: Total scolarité
+    montant_restant: Montant restant
+    type_scolarite: Type de scolarité
+    operateur: Opérateur caisse
+    date_operation: Date opération
+    montant_attendu: Montant attendu
+    tranche: Tranche
+    libelle: Libellé
+    code: Code
+    date_creation: Date de creation
+    type_recette: Type de recette
+    type_depense: Type de depense
+    type_paiement: Type de paiement
+    niveau: Niveau

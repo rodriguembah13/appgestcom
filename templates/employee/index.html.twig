@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'employee.titre'|trans({}, 'administration') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('employee_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'employee.titre_new'|trans({}, 'administration') }}</a>
+            <a  class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+}%}
+        {% block box_body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'employee.table.firstname'|trans({}, 'administration') }}</th>
+                <th>{{ 'employee.table.lastname'|trans({}, 'administration') }}</th>
+                <th>{{ 'employee.table.phone'|trans({}, 'administration') }}</th>
+                <th>{{ 'employee.table.birthday'|trans({}, 'administration') }}</th>
+                <th>{{ 'employee.table.username'|trans({}, 'administration') }}</th>
+                <th>{{ 'employee.table.email'|trans({}, 'administration') }}</th>
+                <th>{{ 'employee.table.enabled'|trans({}, 'administration') }}</th>
+                <th>{{ 'employee.table.roles'|trans({}, 'administration') }}</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in employees %}
+            <tr>
+                <td>{{ employee.id }}</td>
+                <td>{{ employee.firstname }}</td>
+                <td>{{ employee.lastname }}</td>
+                <td>{{ employee.phone }}</td>
+                <td>{{ employee.birthday ? employee.birthday|date('Y-m-d') : '' }}</td>
+                <td>{{ employee.compte.username }}</td>
+                <td>{{ employee.compte.email }}</td>
+                <td>  {% if employee.compte.enabled %}
+                        <a class="btn btn-success btn-xs" href="{{ path('user_enable', {'id': employee.compte.id}) }}">active</a>
+                    {% else %}
+                        <a class="btn btn-danger btn-xs" href="{{ path('user_enable', {'id': employee.compte.id}) }}">desactive</a>
+                    {% endif %}</td>
+                <td>{{ employee.compte.roles ? employee.compte.roles|join(', ') : '' }}</td>
+                <td>
+                    <div class="dropdown">
+
+                        <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-arrow-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                   href="{{ path('employee_edit',{'id':employee.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.show'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ path('user_edit',{'id':employee.compte.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.edit_compte'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item" onclick='getItem_id({{ employee.id }})' href="#"
+                                   id="delete_" data-toggle="modal" data-target="#deleteModa"><i
+                                            class="fa fa-trash"></i>{{ 'button.delete'|trans({}, 'action') }}</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+   {% include 'employee/javascript.html.twig' %}
+{% endblock %}

@@ -1,0 +1,27 @@
+titre:
+  order_customer: Order customer
+  order_fournisseur: Order fournisseur
+  order_new: New Order
+  order_edit: Edit order
+  order_delete: Delete order
+  generate_order: Generate order
+  generate_auto_order: Genérer auto commande
+  generate_bon_order: Genérer Bon commande
+  table:
+  paymentMethod: Payment method
+  currency: currency
+  order_key: Order key
+  total: Total
+  refundTotal: refundTotal
+  shippingTotal: shippingTotal
+  discountTotal: discountTotal
+  totalTax: totalTax
+  amount: Amount
+  date_paid: Date paid
+  status: Order status
+  fournisseur: Fournisseur
+  customer: Customer
+  product: Product
+  CreatedAt: Created At
+  quantity: Quantity
+  price: Price

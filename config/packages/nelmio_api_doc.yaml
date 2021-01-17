@@ -1,0 +1,28 @@
+nelmio_api_doc:
+  documentation:
+    info:
+      title: GE-SCHOOL api
+      description: JSON API for GE-SCHOOL. dowload a [Swagger file](doc.json) for import e.g in Postman
+      version: 1.0.0
+    securityDefinitions:
+      apiToken:
+        type: apiKey
+        name: X-AUTH-TOKEN
+        in: header
+      apiUser:
+        type: apiKey
+        name: X-AUTH-USER
+        in: header
+  #        security:
+  #            - X-AUTH-TOKEN: [ ]
+  #            - X-AUTH-USER: [ ]
+  areas: # to filter documented areas
+    path_patterns:
+      - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+      - ^/{_locale}/api/
+  models:
+   # use_jms: false
+    names:
+      - { alias: StudentApiForm, type: App\Form\API\StudentApiType, groups: [ Default, Entity, Student ] }
+      - { alias: StudentEntity,  type: App\Entity\Student, groups: [ Default, Entity, Student ] }
+      - { alias: StudentCollection, type: App\Entity\Student ,groups: [Default, Collection, Student] }

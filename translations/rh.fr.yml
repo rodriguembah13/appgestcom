@@ -1,0 +1,82 @@
+professeur:
+  titre_professeur: Professeurs
+  titre_professeur_detail: Détail professeur
+  titre_personnel_new: Ajouter un professeur
+  recherche: Recherche rapide
+  valeur: nom,login
+  table:
+    matricule: Matricule
+    nom: Nom complet
+    telephone: Télèphone
+    email: Email
+    username: Nom d'utilisateur
+    sexe: sexe
+    date_creation: Date de creation
+    adresse: Adresse
+    active: Active
+    enfant: Enfants
+    salaire_fixe: Salaire Fixe
+    salaire_heure: Salaire par heure
+    lieu_naissance: Lieu naissance
+    date_naissance: Date de naissance
+    matieres: matières
+    photo: Photo
+  affectation:
+    titre: Affectation
+    titre_classe_professor: Affectation par professeur
+    titre_classe_matiere: Affectation par matière
+    classe: classe
+    professor: Professeur
+    matiere: Matière
+    coef: Coefficient
+    year: Année scolaire
+    status: Status
+personnel:
+  titre_personnel: Personnels
+  titre_personnel_detail: Détail professeur
+  titre_personnel_new: Ajouter un personnel
+  table:
+    matricule: Matricule
+    nom: Nom complet
+    telephone: Télèphone
+    email: Email
+    username: Nom d'utilisateur
+    sexe: sexe
+    date_creation: Date de creation
+    adresse: Adresse
+    active: Active
+    enfant: Enfants
+    salaire_fixe: Salaire Fixe
+    salaire_heure: Salaire par heure
+    lieu_naissance: Lieu naissance
+    date_naissance: Date de naissance
+    classes: classes
+    photo: Photo
+paie:
+  titre_structure: Structure du bulletin de paie
+  titre_structure_new: Nouvelle structure
+  titre_bulletinpaie: Bulletins de paie
+  titre_bulletinpaie_new: Nouveau bulletin de paie
+  titre_avance_salaire: Avance sur salaires
+  titre_avance_salaire_new: Nouvelle avance sur salaire
+  titre_regle_salaire: Régles de la paie
+  titre_regle_salaire_new: Nouvelle régle
+  titre_regle_salaire_categorie: Catégorie de régle
+  titre_regle_salaire_categorie_new: Nouvelle catégorie
+  table:
+    libelle: Libelle
+    reference: Référence
+    employe: Employe
+    etat: Status
+    datepaie: Date de paie
+    code: Code
+    regle: Régle
+    montant: Montant
+    total: Total
+    quantite: Quantité
+    montant_restant: Montant restant
+    mois: Mois
+    annee: Année
+    echeance: Écheance
+
+

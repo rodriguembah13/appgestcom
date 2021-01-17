@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'product.titre'|trans({}, 'product') }}{% endblock %}
+{% block page_subtitle %} {{ inventory.libelle }} {% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+
+    <table class="table" id="table_inventory">
+        <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity in stock</th>
+            <th>Real Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for line in lines %}
+            <tr>
+              <td>{{ line.product.name }}</td>
+                <td>{{ line.stockQuantity}}</td>
+                <td>{{ line.realQuantity}}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'inventory/javascript.html.twig' %}#}
+{% endblock %}

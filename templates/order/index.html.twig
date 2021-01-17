@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'titre.order_customer'|trans({}, 'order') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('order_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i> {{ 'titre.order_new'|trans({}, 'order') }}</a>
+            <a  class="btn btn-default btn-sm" href="{{ path('csv_data_new') }}"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+    <br>
+    {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+        'boxtype' : 'success',
+        'solid' : 0,
+        }%}
+        {% block box_body %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'table.customer'|trans({}, 'order') }}</th>
+                <th>{{ 'table.order_key'|trans({}, 'order') }}</th>
+                <th>{{ 'table.total'|trans({}, 'order') }}</th>
+                <th>{{ 'table.CreatedAt'|trans({}, 'order') }}</th>
+                <th>{{ 'table.date_paid'|trans({}, 'order') }}</th>
+                <th>{{ 'table.status'|trans({}, 'order') }}</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.customer }}</td>
+                <td>{{ order.orderKey }}</td>
+                <td>{{ order.total }}</td>
+                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ order.datePaid ? order.datePaid|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ order.status}}</td>
+                <td>
+                    <div class="dropdown">
+
+                        <a href="#" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-arrow-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                   href="{{ path('order_show',{'id':order.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.show'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item" onclick='getItem_id({{ order.id }})' href="#"
+                                   id="delete_" data-toggle="modal" data-target="#deleteModa"><i
+                                            class="fa fa-trash"></i>{{ 'button.delete'|trans({}, 'action') }}</a></li>
+                            <li class="divider"></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ path('order_show',{'id':order.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.decomposite'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ path('order_show',{'id':order.id}) }}" target="_blank"><i
+                                            class="fa fa-eye"></i> {{ 'product.recompose'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ path('order_show',{'id':order.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'inscription.exclusion'|trans({}, 'action') }}</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'order/javascript.html.twig' %}
+{% endblock %}

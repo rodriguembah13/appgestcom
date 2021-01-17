@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'category.new'|trans({}, 'product') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+}%}
+        {% block box_body %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product_category.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ product_category.name }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ product_category.slug }}</td>
+            </tr>
+            <tr>
+                <th>ParentId</th>
+                <td>{{ product_category.parentId }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {# {% include 'matiere/javascript.html.twig' %}#}
+{% endblock %}

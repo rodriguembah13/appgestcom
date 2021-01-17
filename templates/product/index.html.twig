@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'product.titre'|trans({}, 'product') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('product_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'product.new'|trans({}, 'product') }}</a>
+            <a  class="btn btn-default btn-sm" href="{{ path('csv_data_new') }}"><i class="fa fa-download"></i>{{ 'product.import'|trans({}, 'product') }}</a>
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'product.table.name'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.slug'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.sku'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.on_sale'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.is_in_stock'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.is_decomposable'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.stockQuantity'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.salePrice'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.MinQuantitySale'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.MaxQuantitySale'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.regularPrice'|trans({}, 'product') }}</th>
+                <th>{{ 'product.table.Description'|trans({}, 'product') }}</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.slug }}</td>
+                <td>{{ product.sku }}</td>
+                <td>{{ product.onSale ? 'Yes' : 'No' }}</td>
+                <td>{{ product.isInStock ? 'Yes' : 'No' }}</td>
+                <td>{{ product.isDecomposable ? 'Yes' : 'No' }}</td>
+                <td>{{ product.stockQuantity }}</td>
+                <td>{{ product.salePrice }}</td>
+                <td>{{ product.minQuantitySale }}</td>
+                <td>{{ product.maxQuantitySale }}</td>
+                <td>{{ product.regularPrice }}</td>
+                <td>{{ product.description }}</td>
+                <td><div class="dropdown">
+
+                        <a href="#" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-arrow-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                   href="{{ path('product_show',{'id':product.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.show'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item" onclick='getItem_id({{ product.id }})' href="#"
+                                   id="delete_" data-toggle="modal" data-target="#deleteModa"><i
+                                            class="fa fa-trash"></i>{{ 'button.delete'|trans({}, 'action') }}</a></li>
+                            <li class="divider"></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ path('product_show',{'id':product.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'product.decompose'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ path('product_show',{'id':product.id}) }}" target="_blank"><i
+                                            class="fa fa-eye"></i> {{ 'product.recompose'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item"
+                                   href="{{ path('product_show',{'id':product.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'inscription.exclusion'|trans({}, 'action') }}</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+     {% include 'product/javascript.html.twig' %}
+{% endblock %}

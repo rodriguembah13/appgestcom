@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<title>Edit ProductCategory</title>
+
+{% block body %}
+    <h1>Edit ProductCategory</h1>
+
+    {{ include('product_category/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {# {% include 'matiere/javascript.html.twig' %}#}
+{% endblock %}

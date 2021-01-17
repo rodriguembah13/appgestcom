@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CsvData index{% endblock %}
+
+{% block body %}
+    <h1>CsvData index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Csv_filename</th>
+                <th>Csv_header</th>
+                <th>Csv_data</th>
+                <th>Csv_type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for csv_datum in csv_datas %}
+            <tr>
+                <td>{{ csv_datum.id }}</td>
+                <td>{{ csv_datum.csvFilename }}</td>
+                <td>{{ csv_datum.csvHeader ? 'Yes' : 'No' }}</td>
+                <td>{{ csv_datum.csvData }}</td>
+                <td>{{ csv_datum.csvType }}</td>
+                <td>
+                    <a href="{{ path('csv_data_show', {'id': csv_datum.id}) }}">show</a>
+                    <a href="{{ path('csv_data_edit', {'id': csv_datum.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('csv_data_new') }}">Create new</a>
+{% endblock %}

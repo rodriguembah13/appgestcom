@@ -1,0 +1,134 @@
+parametre:
+  titre_year: Année scolaire
+  titre_year_creer: Ajouter une année scolaire
+  titre_classe: Classe
+  titre_classe_new: Ajouter une classe
+  titre_classe_edit: Modifier une classe
+  titre_sequence: Evaluation
+  titre_trimestre: Trimestre
+  titre_matiere: Matiere
+  titre_matiere_add: Ajouter une matière
+  titre_matiere_edit: modifier une matière
+  titre_groupe: Groupe de matière
+  titre_groupe_add: Ajouter un groupe de matière
+  titre_groupe_edit: Modifier un groupe de matière
+  titre_niveau: Niveau
+  titre_niveau_new: Ajouter un niveau
+  titre_niveau_edit: Modifier un niveau
+  titre_cycle: Cycle
+  titre_cycle_new: Ajouter un cycle
+  titre_cycle_edit: Modifier un cycle
+  titre_scolarite: Paramètrage de la scolarité
+  titre_scolarite_add: Ajouter un type de scolarité
+  titre_tranche: Tranche Scolarité
+  titre_tranche_new: Ajouter une Tranche Scolarité
+  titre_configuration: configuration de l'établissement
+  titre_th: Tableau d'honneur
+  titre_stats_matiere: Statistique des Matières
+  titre_releve_note: Rélève de notes
+  titre_pv: Procès verbal
+  titre_registre_note: Registre des notes
+  titre_resultat_note: Resultats par ordre de merite
+  titre_model_sms: 'model Sms'
+  table:
+    libelle: Libellé
+    date_debut: Date de debut
+    date_fin: Date de fin
+    status: Status
+    indice: Indice
+    pourcentage: Pourcentage
+    cycle: Cycle
+    niveau: Niveau
+    titulaire: Titulaire
+    groupe: Groupe
+    montant: Montant
+    priorite: Priorité
+    action: Action
+    date_echeance: Date d'écheance
+    nom: Nom de l'établissement
+    telephone: Télèphone
+    devise: Dévise
+    seq_trim: Evaluation par trimestre
+    directeur: Directeur
+    localisation: Localisation
+    format_matricule: Format matricule
+    slogan: Slogan
+    camooapikey: Camoo api key
+    camoosecretkey: Camoo secret key
+    titleSms: Titre de sms
+    isSmstest: Environnement de test
+    testSecretkey: test secret key
+    testApikey: Test api key
+    activateMutiAffectation: Activer la multi-affectation?
+    minCompositionTrimestre: Nombre de composition pour etre absent
+    minMatiereComposition: Nombre de matiere min par composition pour etre absent
+    minExclusion: Min Exclusion
+    minAvertDiscipline: Nombre d'heure min pour avertissement
+    maxAvertDiscipline: Nombre d'heure max pour avertissement
+    minBlameDiscipline: Nombre d'heure min pour Blame
+    maxBlameDiscipline: Nombre d'heure max pour Blame
+    minBlame: Moyenne min pour blame
+    maxBlame: Moyenne max pour blame
+    minFelicitation: Moyenne min pour felicitation
+    maxFelicitation: Moyenne max pour felicitation
+    maxEncouragement: Moyenne max pour Encouragement
+    minEncouragement: Moyenne min pour encouragement
+    maxTableauHonneur: Moyenne max pour Tableau d'honneur
+    minTableauHonneur: Moyenne min pour Tableau d'honneur
+
+  sms:
+    titre_campaign: Modeles sms
+    titre_campaign_new: Ajouter un modele de sms
+    titre_campaign_mail: Campagne des mails
+    titre_campaign_mail_new: Ajouter une campagne des mails
+    maximun_mot: Maximun 160 caratères
+    titre_simple_sms: 'Simple sms'
+    table:
+      type: Type de element
+      date_debut: Date de debut
+      date_fin: Date de fin
+      nbre: Quantité
+      createdby: Crée par
+      status: Status
+      sendby: Envoyée par
+      datecreation: Date de creation
+      message: Message
+      username: Username
+      password: Password
+      classe: Classe
+      libelle: Libéllé
+      senderName: Nom envoyeur
+      sizeRang: Nombre caractere Rang
+      sizeName: Nombre caractere Name
+      sizeMoyenne: Nombre caractere Moyenne
+      sizeMatricule: Nombre caractere Matricule
+      sizeEvaluation: Nombre caractere Evaluation
+      sizeClass: Nombre caractere Classe
+      sizeTrimestre: Nombre caractere Trimestre
+      sizeSequence: Nombre caractere Sequence
+
+  audit:
+    titre: Audits
+    titre_show: Details d'audit du %date%  par %user%
+    table:
+      user: Utilisateur
+      date_connexion: Date de connexion
+      year: Année academique
+      operation: Operation
+      controller: origine
+      machine: Machine
+employee:
+  titre: Employés
+  titre_new: Nouveau employé
+  titre_edit: Modifier employé
+  table:
+    firstname: Nom
+    lastname: Prenoms
+    birthday: birthday
+    phone: Téléphone
+    website: Site web
+    company : Compagnie
+    email: email
+    username: 'login'
+    enabled: 'actif'
+    roles: 'roles'

@@ -1,0 +1,38 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="col-md-8">
+        {{  form_row(form.name) }}
+        {{form_row(form.slug) }}
+        {{form_row(form.sku) }}
+    </div>
+    <div class="col-md-4">
+        {% if product.imageFilename is defined and product.imageFilename  is not null %}
+            <img id="img_emp" class="img img-responsive img-thumbnail" style="width:140px;height: 140px"
+                 src="{{ asset('uploads/' ~ product.imageFilename) }}" title="my image"
+                 alt="My image">
+        {% else %}  <img id="img_emp" class="img img-responsive img-thumbnail" style="width:140px;height: 140px"
+                         src="{{ asset('build/images/default_avatar.png') }}" title="my image"
+                         alt="My image">
+        {% endif %}
+        {#{{form_row(form.imageFilename) }}#}
+        {{form_row(form.description) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        {{form_row(form.salePrice) }}
+        {{form_row(form.regularPrice) }}
+        {{form_row(form.stockQuantity) }}
+        {{form_row(form.is_decomposable) }}
+        {{form_row(form.on_sale) }}
+        {{form_row(form.supplier) }}
+    </div>
+    <div class="col-md-6">
+        {{form_row(form.maxQuantitySale) }}
+        {{form_row(form.minQuantitySale) }}
+        {{form_row(form.regularPrice) }}
+        {{form_row(form.productCategories) }}
+    </div>
+</div>
+    <button class="btn btn-primary">{{ 'button.save'|trans({}, 'action') }}</button>
+{{ form_end(form) }}

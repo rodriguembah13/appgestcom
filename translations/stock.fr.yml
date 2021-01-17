@@ -1,0 +1,35 @@
+stock:
+  titre: Stocks
+  placeholder_entrepot: Veuillez choisir un magasin
+  table:
+    quantity: Quantite
+    entrepot: Magasin
+    low_stock_quantity: Quantité seuil
+    CreatedAt: Date de creation
+    mouvement:
+      titre: Mouvement stock
+      titre_in: Entrée en stock
+      titre_out: Sortie de stock
+      titre_transfert: Transfert de produit
+      mouvement_in: Nouvelle entrée
+      mouvement_out: Nouvelle Sortie
+      table:
+        quantity: Quantité
+        CreatedAt: Date de creation
+        libelle: Libellé
+        product: Produit
+        entrepot: Magasin
+        price: 'prix'
+        total: 'total'
+        quantity_out: 'Quantite sortie'
+        quantity_in: 'Quantite entree'
+        type: 'Nature mouvement'
+    inventory:
+      titre: Inventaires
+      new: Nouveau Inventaire
+      table:
+        quantity_real: Quantité physique
+        quantity_stock: Quantité en stock
+        product: Produit
+        CreatedAt: Date de creation
+        libelle: Libellé

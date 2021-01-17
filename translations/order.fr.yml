@@ -1,0 +1,38 @@
+titre:
+  order_customer: Commande client
+  order_fournisseur: Commande fournisseur
+  order_new: Nouvelle Commande
+  order_edit: Editer commande
+  order_delete: Supprimer commande
+  generate_order: Genérer commande
+  generate_auto_order: Genérer auto commande
+  generate_bon_order: Genérer Bon commande
+  order_detail: 'Detail de la commande'
+table:
+  paymentMethod: Methode de paiement
+  currency: Monaie
+  order_key: Clé de la commande
+  total: Total
+  refundTotal: Total
+  shippingTotal: Total transport
+  discountTotal: discountTotal
+  totalTax: totalTax
+  amount: Montant
+  date_paid: Date de paiement
+  status: Status commande
+  fournisseur: Fournisseur
+  customer: Client
+  product: Produit
+  CreatedAt: Date de creation
+  quantity: Quantité
+  price: Prix
+  date_livraison: 'Date de livraison'
+  entrepot: 'Magasin'
+  tauxremise: Taux remise
+  tauxtva: Taux Tva
+  state:
+    Preparation_in_progress: Commande en cours de preparation
+    Payment_accepted: Payement acceptée
+    Shipped: Encours de livraison
+    Delivered: Commande Livrée
+    Canceled: Commande supprimée

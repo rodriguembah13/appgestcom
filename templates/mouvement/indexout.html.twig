@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'stock.table.mouvement.titre_out'|trans({}, 'stock') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-danger btn-sm" href="{{ path('mouvement_new_sorite') }}" data-toggle="tooltip" data-placement="top" title="{{ 'stock.table.mouvement.titre_in'|trans({}, 'stock') }}"><i class="fa fa-plus"></i> {{ 'stock.table.mouvement.titre_out'|trans({}, 'stock') }}</a>
+         </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+    <br>
+    {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+        'boxtype' : 'success',
+        'solid' : 0,
+    }%}
+        {% block box_body %}
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>{{ 'stock.table.mouvement.table.libelle'|trans({}, 'stock') }}</th>
+                    <th>{{ 'stock.table.mouvement.table.quantity_out'|trans({}, 'stock') }}</th>
+                    <th>{{ 'stock.table.mouvement.table.entrepot'|trans({}, 'stock') }}</th>
+                    <th>CreatedAt</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for mouvement in mouvements %}
+                    <tr>
+                        <td>{{ mouvement.id }}</td>
+                        <td>{{ mouvement.libelle }}</td>
+                        <td>{{ mouvement.outQuantity }}</td>
+                        <td>{{ mouvement.entrepot }}</td>
+                        <td>{{ mouvement.createdAt ? mouvement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <div class="dropdown">
+
+                                <a href="#" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-arrow-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item"
+                                           href="{{ path('mouvement_show',{'id':mouvement.id}) }}"><i
+                                                    class="fa fa-eye"></i> {{ 'button.show'|trans({}, 'action') }}</a></li>
+                                    <li><a class="dropdown-item" onclick='getItem_id({{ mouvement.id }})' href="#"
+                                           id="delete_" data-toggle="modal" data-target="#deleteModa"><i
+                                                    class="fa fa-trash"></i>{{ 'button.delete'|trans({}, 'action') }}</a></li>
+                                    <li class="divider"></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'mouvement/javascript.html.twig' %}
+{% endblock %}

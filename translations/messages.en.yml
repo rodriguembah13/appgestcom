@@ -1,0 +1,21 @@
+Home: Home
+menu:
+  homepage: Dashboard
+  logout: Se deconnecter
+  order:
+    titre: Orders
+    order_customer: Commande Client
+    order_fournisseur: Commande fournisseur
+  product:
+    titre: Products
+    category: Categories
+    entrepot: Magasin
+    mouvement_scolarite: Mouvement Scolarité
+  caisse:
+    titre: Caisse
+    customer: Customers
+    fournisseur: Fournisseurs
+  stock:
+    titre: Stocks
+    mouvement: Mouvements
+    inventory: Inventaires

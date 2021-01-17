@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'entrepot.titre'|trans({}, 'product') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('entrepot_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'entrepot.new'|trans({}, 'product') }}</a>
+            <a  class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'entrepot.table.name'|trans({}, 'product') }}</th>
+                <th>{{ 'entrepot.table.phone'|trans({}, 'product') }}</th>
+                <th>{{ 'entrepot.table.director'|trans({}, 'product') }}</th>
+                <th>{{ 'entrepot.table.adresse'|trans({}, 'product') }}</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entrepot in entrepots %}
+            <tr>
+                <td>{{ entrepot.id }}</td>
+                <td>{{ entrepot.name }}</td>
+                <td>{{ entrepot.phone }}</td>
+                <td>{{ entrepot.director }}</td>
+                <td>{{ entrepot.adresse }}</td>
+                <td>{{ entrepot.createdAt |date('Y-m-d')}}</td>
+                <td>
+                    <div class="dropdown">
+
+                        <a href="#" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-arrow-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                   href="{{ path('entrepot_show',{'id':entrepot.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.show'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item" onclick='getItem_id({{ entrepot.id }})' href="#"
+                                   id="delete_" data-toggle="modal" data-target="#deleteModa"><i
+                                            class="fa fa-trash"></i>{{ 'button.delete'|trans({}, 'action') }}</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>   {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+     {% include 'entrepot/javascript.html.twig' %}
+{% endblock %}

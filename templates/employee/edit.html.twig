@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'employee.titre_edit'|trans({}, 'administration') }}{% endblock %}
+{% block page_subtitle %} {% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+}%}
+        {% block box_body %}
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-8">
+                    {{  form_row(form.firstname) }}
+                    {{form_row(form.lastname) }}
+                    {{form_row(form.phone) }}
+                    {{form_row(form.birthday) }}
+                </div>
+                <div class="col-md-4">
+                    {% if employee.image is defined and employee.image  is not null %}
+                        <img id="img_emp" class="img img-responsive img-thumbnail" style="width:140px;height: 140px"
+                             src="{{ asset('uploads/' ~ employee.image) }}" title="my image"
+                             alt="My image">
+                    {% else %}  <img id="img_emp" class="img img-responsive img-thumbnail" style="width:140px;height: 140px"
+                                     src="{{ asset('build/images/default_avatar.png') }}" title="my image"
+                                     alt="My image">
+                    {% endif %}
+                    {{form_row(form.image) }}
+                </div>
+            </div>
+            <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+            {{ form_end(form) }}
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {# {% include 'matiere/javascript.html.twig' %}#}
+{% endblock %}

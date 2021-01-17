@@ -1,0 +1,70 @@
+{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+
+{% block stylesheets %}
+    {# {{ parent() }} #}
+    {{ encore_entry_link_tags('adminlte') }}
+    {# <link rel="stylesheet" href="{{ asset('style.css') }}"> #}
+{% endblock %}
+{% block page_title %}STACK{% endblock %}
+{% block logo_large %} <b>STACK</b>{% endblock %}
+{% block logo_mini %}<b>S-</b>K{% endblock %}
+{% block sidebar_search %}{% endblock %}
+ {# {{ macro.avatar(user.avatar, user.email)  }} #}
+{% block navbar_start %}
+    {# <li class="pull-left"><a class="" style="font-weight: bold">Année academique: {{ year }}</a></li>
+    <li class="pull-left">{% if year.isValid %}<a class="bg-red" style="font-weight: bold" ><marquee>Version Demo</marquee></a> {% endif %}</li>
+    #}
+
+    <li class="dropdown messages-menu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fas fa-globe-africa"></i>
+            <span class="label label-primary">{{ app_locales|length }}</span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="header">Change language (scroll for more)</li>
+            <li>
+                <ul class="menu">
+                    {% for locale in app_locales %}
+                        <li>
+                            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': locale})) }}">
+                                {{ locale|language(app.request.get('_locale')) }}
+                                <span class="pull-right">{{ locale }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </li>
+{% endblock %}
+{% block navbar_tasks %}
+{% endblock %}
+{% block navbar_messages %}
+    {# <a id="github" style="position: absolute; top: 0; right: 0; border: 0" href="#">
+        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub">
+    </a> #}
+{% endblock %}
+                    {% block navbar_notifications %}
+                    {% endblock %}
+  {% block navbar_control_sidebar_toggle %}
+  {% endblock %}
+{% block breadcrumb %}
+    {% block page_search %}{% endblock %}
+    {% block page_actions %}{% endblock %}
+{% endblock %}
+{% block footer %}
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2020<a href="#">STACK</a>.</strong> All rights reserved.
+    </footer>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    {{ encore_entry_script_tags('adminlte') }}
+    {% include 'includes/javascript.html.twig' %}
+{% endblock %}

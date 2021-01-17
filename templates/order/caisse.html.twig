@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'product.titre'|trans({}, 'product') }}{% endblock %}
+{% block page_subtitle %} {{ 'product.sub_titre'|trans({}, 'product') }} {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('product_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i></a>
+            <a  class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+<br>
+    <div class="row">
+    <div class="col-lg-9">
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+
+            <div class="col-md-6">
+                {{  form_row(form.product) }}
+            </div>
+            <div class="col-md-4">
+                {{  form_row(form.quantity) }}
+            </div>
+            {{ form_end(form) }}
+            <div class="col-md-2">
+                <button style="margin-top: 25px" type="button" class="btn btn-primary " id="add_line"><i
+                            class="fa fa-plus"></i> </button>
+            </div>
+        {% endblock %}
+{% endembed %}
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+                }%}
+                {% block box_body %}
+            <table class="table table-condensed table-bordered" id="table_depart">
+                <thead>
+                <tr><th></th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th class="td" scope="row" colspan="4" style="text-align:right; border-top-width: 4px;">Total</th>
+                    <td class="td" style="text-align:left; border-top-width: 4px;"><span id="totaltex"></span></td>
+                </tr>
+                </tfoot>
+            </table>
+        {% endblock %}
+                {% block box_footer %}
+                    <div class="col-md-3">
+                        <input class="hidden" id="total" type="number"/>
+                    </div>
+                    <div class="col-md-3 pull-right">
+                        <button style="margin-top: 25px" type="button" class="btn btn-primary " id="save"><i
+                                    class="fa fa-save"></i> Save</button>
+                    </div>
+                {% endblock %}
+{% endembed %}
+
+    </div>
+    <div class="col-lg-3">
+        {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+            'boxtype' : 'success',
+            'solid' : 0,
+            }%}
+            {% block box_body %}
+                <div class="col-md-10">
+                    {{  form_row(form_customer.customer) }}
+                </div>
+                <div class="col-md-2">
+                    <a style="margin-top: 25px" type="button" class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#customerModal"><i
+                                class="fa fa-plus"></i> </a>
+                </div>
+            {% endblock %}
+        {% endembed %}
+
+    </div>
+    </div>
+    <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="modalcustomer"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">New Customer</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="customer_name">Name</label>
+                        <input class="form-control" id="customer_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer_phone">Phone</label>
+                        <input class="form-control" id="customer_phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer_email">Email</label>
+                        <input class="form-control" id="customer_email">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_delete_customer">Close
+                    </button>
+                    <button type="button" class="btn btn-primary " id="create_customer">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'order/javascript.html.twig' %}
+{% endblock %}
+

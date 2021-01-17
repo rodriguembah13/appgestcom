@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'supplier.titre'|trans({}, 'caisse') }}{% endblock %}
+{% block page_subtitle %} {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('fournisseur_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'supplier.new'|trans({}, 'caisse') }}</a>
+            <a  class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'supplier.table.name'|trans({}, 'caisse') }}</th>
+                <th>{{ 'supplier.table.phone'|trans({}, 'caisse') }}</th>
+                <th>{{ 'supplier.table.adresse'|trans({}, 'caisse') }}</th>
+                <th>{{ 'supplier.table.website'|trans({}, 'caisse') }}</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fournisseur in fournisseurs %}
+            <tr>
+                <td>{{ fournisseur.id }}</td>
+                <td>{{ fournisseur.name }}</td>
+                <td>{{ fournisseur.phone }}</td>
+                <td>{{ fournisseur.adresse }}</td>
+                <td>{{ fournisseur.website }}</td>
+                <td>
+                    <div class="dropdown">
+
+                        <a href="#" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-arrow-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                   href="{{ path('product_category_show',{'id':fournisseur.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.show'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item" onclick='getItem_id({{ fournisseur.id }})' href="#"
+                                   id="delete_" data-toggle="modal" data-target="#deleteModa"><i
+                                            class="fa fa-trash"></i>{{ 'button.delete'|trans({}, 'action') }}</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>   {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+   {% include 'fournisseur/javascript.html.twig' %}
+{% endblock %}

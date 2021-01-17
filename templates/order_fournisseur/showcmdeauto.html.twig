@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'titre.order_new'|trans({}, 'order') }}{% endblock %}
+{#{% block page_subtitle %} {{ 'product.sub_titre'|trans({}, 'order') }} {% endblock %}#}
+{#{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('product_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'titre.generate_bon_order'|trans({}, 'order') }}</a>
+            <a  class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}#}
+
+{% block page_content %}
+    <input type="number" id="entrepot" value="{{ entrepot.id }}" class="hidden">
+        {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+            'boxtype' : 'success',
+            'solid' : 0,
+            }%}
+                {% block box_body %}
+                    <table class="table" id="table_bon">
+                        <thead>
+                        <tr>
+                            <th><input class='checkbox' type='checkbox' checked/></th>
+                            <th>Product</th>
+                            <th>Magasin</th>
+                            <th>Quantity in stock</th>
+                            <th>Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for stock in order_products %}
+                            <tr>
+                                <td><input class='checkbox' type='checkbox' checked/><span class='hidden'>{{ stock.id }}</span></td>
+                                <td>{{ stock.product }}</td>
+                                <td>{{ stock.entrepot }}</td>
+                                <td>{{ stock.quantity }}</td>
+                                <td><input type="number"/></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endblock %}
+            {% block box_footer %}
+            <div class="btn-group pull-right">
+                <a id="generate_bon" class="btn btn-success btn-sm" href="#" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'titre.generate_bon_order'|trans({}, 'order') }}</a>
+            </div>
+{% endblock %}
+        {% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'order_fournisseur/javascript.html.twig' %}
+{% endblock %}
+
+
+

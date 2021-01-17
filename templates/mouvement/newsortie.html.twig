@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'stock.table.mouvement.titre_out'|trans({}, 'stock') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="col-md-5">
+           {# {% form_theme form '@AdminLTE/layout/form-theme-horizontal.html.twig' %}#}
+          {#  {{  form_row(form.customer) }}#}
+        </div>
+        {#<div class="btn-group pull-right">
+            <a id="generate_cmde" class="btn btn-success btn-sm" href="#" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'titre.generate_order'|trans({}, 'order') }}</a>
+            <a id="generate_auto_cmde" class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i>{{ 'titre.generate_auto_order'|trans({}, 'order') }}</a>
+        </div>#}
+    </div>
+{% endblock %}
+{% block page_content %}
+    <br>
+    <div class="row">
+        <div class="col-md-7">
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+            }%}
+                {% block box_body %}
+                    <div class="col-md-5">
+                        {{  form_row(form_line.product) }}
+                    </div>
+                    <div class="col-md-5">
+                        {{  form_row(form_line.quantity) }}
+                    </div>
+                    {{ form_end(form_line) }}
+                    <div class="col-md-2">
+                        <button style="margin-top: 25px" type="button" class="btn btn-primary btn-sm" id="add_line_out"><i
+                                    class="fa fa-plus"></i> </button>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+        <div class="col-md-5">
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'warning',
+                'solid' : 0,
+            }%}
+                {% block box_body %}
+                    <div class="col-md-10">
+                        {{  form_row(form.customer) }}
+                    </div>
+                    {#<div class="col-md-5">
+                        {{  form_row(form_line.quantity) }}
+                    </div>
+                    {{ form_end(form_line) }}
+                    <div class="col-md-2">
+                        <button style="margin-top: 25px" type="button" class="btn btn-primary btn-sm" id="add_line"><i
+                                    class="fa fa-plus"></i> </button>
+                    </div>#}
+                {% endblock %}
+                {% block box_footer %}
+                    <div class="col-md-3">
+                        <input class="hidden" id="total" type="number"/>
+                    </div>
+                    <div class="col-md-3 pull-right">
+                        <button style="margin-top: 25px" type="button" class="btn btn-primary " id="saveout"><i
+                                    class="fa fa-save"></i> {{ 'button.save'|trans({}, 'action') }}</button>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+    {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+        'boxtype' : 'success',
+        'solid' : 0,
+    }%}
+        {% block box_body %}
+            <table class="table table-condensed table-bordered" id="table_depart">
+                <thead>
+                <tr><th></th>
+                    <th>{{ 'stock.table.mouvement.table.product'|trans({}, 'stock') }}</th>
+                    <th>{{ 'stock.table.mouvement.table.price'|trans({}, 'stock') }}</th>
+                    <th>{{ 'stock.table.mouvement.table.quantity'|trans({}, 'stock') }}</th>
+                    <th>{{ 'stock.table.mouvement.table.total'|trans({}, 'stock') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th class="td" scope="row" colspan="4" style="text-align:right; border-top-width: 4px;">{{ 'stock.table.mouvement.table.total'|trans({}, 'stock') }}</th>
+                    <td class="td" style="text-align:left; border-top-width: 4px;"><span id="totaltex"></span></td>
+                </tr>
+                </tfoot>
+            </table>
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'mouvement/javascript.html.twig' %}#}
+{% endblock %}
+
+

@@ -1,0 +1,14 @@
+<li class="dropdown messages-menu">
+    <ul class="dropdown-menu">
+        <li>{{ total }}
+            <ul class="menu">
+                {% for msg in entrepots %}
+                    <li>
+                        <a><p>{{ msg.name }}</p>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+</li>

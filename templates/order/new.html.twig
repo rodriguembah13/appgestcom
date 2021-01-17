@@ -1,0 +1,227 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'titre.order_new'|trans({}, 'order') }}{% endblock %}
+{#{% block page_subtitle %} {{ 'product.sub_titre'|trans({}, 'order') }} {% endblock %}#}
+{#{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('product_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i></a>
+            <a  class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}#}
+{% block page_content %}
+    <br>
+    <div class="row">
+        <div class="col-lg-7">
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+                }%}
+                {% block box_body %}
+
+                    <div class="col-md-4">
+                        {{  form_row(form.product) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{  form_row(form.quantity) }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form_row(form.tauxtva) }}
+                    </div>
+                    {{ form_end(form) }}
+                    <div class="col-md-2">
+                        <button style="margin-top: 25px" type="button" class="btn btn-primary " id="add_line"><i
+                                    class="fa fa-plus"></i> </button>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+                }%}
+                {% block box_body %}
+                    <table class="table table-condensed table-bordered" id="table_depart">
+                        <thead>
+                        <tr><th></th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Taux Tva</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th class="td" scope="row" colspan="5" style="text-align:right; border-top-width: 4px;">Total</th>
+                            <td class="td" style="text-align:left; border-top-width: 4px;"><span id="totaltex"></span></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                {% endblock %}
+                {#{% block box_footer %}
+                    <div class="col-md-3">
+                        <input class="hidden" id="total" type="number"/>
+                    </div>
+                    <div class="col-md-3 pull-right">
+                        <button style="margin-top: 25px" type="button" class="btn btn-primary " id="save"><i
+                                    class="fa fa-save"></i> Save</button>
+                    </div>
+                {% endblock %}#}
+            {% endembed %}
+
+        </div>
+        <div class="col-lg-5">
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+                }%}
+                {% block box_body %}
+                    <div class="row">
+                        <div class="col-md-10">
+                            {{  form_row(form_order.customer) }}
+                        </div>
+                        <div class="col-md-2">
+                            <a style="margin-top: 25px" type="button" class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#customerModal"><i
+                                        class="fa fa-plus"></i> </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            {{ form_row(form_order.entrepot) }}
+                            <div class="form-group">
+                                <label class="control-label" for="field_vat">VAT</label>
+                                <input type="text" class="form-control input-group disabled" name="vat" id="field_vat"
+                                />
+                            </div>
+                            {{ form_row(form_order.datelivraison) }}
+                            <div class="form-group has-feedback">
+                                <label class="control-label" for="field_status">Etat de la commande</label>
+
+                                <select class="form-control" id="field_status" name="method">
+                                    <option value=""></option>
+                                    <option value="Encours">Commande encours</option>
+                                    <option value="Annulleé">Commande annullée</option>
+                                    <option value="Livreé">Commande livrée</option>
+                                </select>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label class="control-label" for="field_method">Method Payement</label>
+
+                                <select class="form-control" id="field_method" name="method">
+                                    <option value=""></option>
+                                    <option value="CARTE BANCAIRE">CARTE BANCAIRE</option>
+                                    <option value="CASH">CASH</option>
+                                    <option value="VIREMENT BANCAIRE">VIREMENT BANCAIRE</option>
+                                    <option value="MOBIL MONEY">MOBIL MONEY</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+                }%}
+                {% block box_title %}Paiement{% endblock %}
+                {% block box_body %}
+                    <div class="form-group">
+                        <label class="control-label" for="field_subtotal">Sub Total</label>
+                        <input type="text" class="form-control disabled" name="total" id="field_subtotal"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="field_reduction">Reduction</label>
+                        <input type="text" class="form-control disabled" name="reduction" id="field_reduction"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="field_vat">VAT</label>
+                        <input type="text" class="form-control input-group disabled" name="vat" id="field_vat"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="field_total">Total</label>
+                        <input type="number" class="form-control input-group disabled" name="total" id="field_total"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="field_paiement">Paiement</label>
+                        <input type="text" class="form-control input-group disabled" name="paiement" id="field_paiement"
+                        />
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label class="control-label"  for="field_method">Method Payement</label>
+
+                        <select class="form-control" id="field_method" name="method" >
+                            <option value=""></option>
+                            <option value="CARTE BANCAIRE">CARTE BANCAIRE</option>
+                            <option value="CASH">CASH</option>
+                            <option value="VIREMENT BANCAIRE">VIREMENT BANCAIRE</option>
+                            <option value="MOBIL MONEY">MOBIL MONEY</option>
+                        </select>
+                    </div>
+                {% endblock %}
+                {% block box_footer %}
+                    <div class="col-md-3">
+                        <input class="hidden" id="total" type="number"/>
+                    </div>
+                    <div class="col-md-3 pull-right">
+                        <button style="margin-top: 25px" type="button" class="btn btn-primary " id="save"><i
+                                    class="fa fa-save"></i> Save</button>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+
+        </div>
+    </div>
+    <div class="modal fade" id="customerModal" tabindex="-1" role="dialog" aria-labelledby="modalcustomer"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">New Customer</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="customer_name">Firstname</label>
+                        <input class="form-control" id="customer_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer_lastname">Lastname</label>
+                        <input class="form-control" id="customer_lastname">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer_phone">Phone</label>
+                        <input class="form-control" id="customer_phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer_email">Email</label>
+                        <input class="form-control" id="customer_email">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer_website">WebSite</label>
+                        <input class="form-control" id="customer_website">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close_delete_customer">Close
+                    </button>
+                    <button type="button" class="btn btn-primary " id="create_customer">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'order/javascript.html.twig' %}
+{% endblock %}
+
+

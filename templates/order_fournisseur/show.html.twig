@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'titre.order_detail'|trans({}, 'order') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{#{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('product_new') }}" data-toggle="tooltip" data-placement="top" title="create customer"><i class="fa fa-plus"></i>{{ 'titre.generate_bon_order'|trans({}, 'order') }}</a>
+            <a  class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}#}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-7">
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+            }%}
+                {% block box_title %}<label>Reference commande:</label> {{ order_fournisseur.orderKey }}{% endblock %}
+            {% block box_body %}
+                <p><label>Status de commande:</label> <span class="label label-info">{{ order_fournisseur.status }}</span></p>
+                <p><label>Montant:</label> {{ order_fournisseur.total }}</p>
+                <p><label>Taxes:</label> {{ order_fournisseur.totalTax }}</p>
+                <p><label>Remises:</label> {{ order_fournisseur.discountTotal }}</p>
+                <p><label>Fournisseur:</label> {{ order_fournisseur.fournisseur }}</p>
+                <p><label>Magasin:</label> {{ order_fournisseur.entrepot }}</p>
+                <p><label>Date de creation:</label> {{ order_fournisseur.createdAt | date('y-m-d')}}</p>
+                <p><label>Date de livraison:</label> {{ order_fournisseur.dateLivraison | date('y-m-d') }}</p>
+                <p><label>Creér par:</label> {{ order_fournisseur.createdBy }}</p>
+            {% endblock %}
+            {% endembed %}
+
+        </div>
+        <div class="col-md-5">
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+            }%}
+                {% block box_title %}Action{% endblock %}
+            {% block box_body %}
+            <a class="btn btn-primary btn-sm"><i class="fa fa-print"></i>Imprimer</a>
+                <a class="btn btn-primary btn-sm"><i class="fa fa-book-reader"></i> Bon de commande</a>
+                <div class="row">
+                    <form action="{{ path('order_fournisseur_change_status', {'id': order_fournisseur.id}) }}">
+                    <div class="form-group col-md-9">
+                        <label class="control-label" for="field_status">Etat de la commande</label>
+
+                        <select class="form-control" id="field_status" name="status">
+                            <option value=""></option>
+                            <option value="Encours">Commande encours</option>
+                            <option value="Annulleé">Commande annulle</option>
+                            <option value="Livreé">Commande livree</option>
+                            {# <option value="MOBIL MONEY">MOBIL MONEY</option> #}
+                        </select>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 25px"><i class="fa fa-save"></i> valider</button>
+                    </form>
+                </div>
+
+            {% endblock %}
+            {% endembed %}
+            {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+                'boxtype' : 'success',
+                'solid' : 0,
+            }%}
+            {% block box_title %}Paiement{% endblock %}
+            {% block box_body %}
+            <div class="row">
+                <form action="{{ path('order_fournisseur_add_payment', {'id': order_fournisseur.id}) }}">
+                  <div class="col-md-5">{{ form_row(form.createdAt) }}</div>
+                    <div class="col-md-3">{{ form_row(form.amount) }}</div>
+                    <div class="col-md-3">{{ form_row(form.methodPayment) }}</div>
+                    <button type="submit" class="btn btn-primary btn-sm col-md-1" style="margin-top: 25px"><i class="fa fa-plus-circle"></i></button>
+                </form>
+            </div>
+                <div class="row">
+                    <table class="table col-md-12 table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Montant</th>
+                            <th>Methode</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for payment in paymentorders %}
+                            <tr>
+                                <td>{{ payment.createdAt | date("Y-m-d")}}</td>
+                                <td>{{ payment.amount }}</td>
+                                <td>{{ payment.methodPayment }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+    {% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+        'boxtype' : 'success',
+        'solid' : 0,
+        }%}
+        {% block box_title %}<label>Produits</label>{% endblock %}
+        {% block box_body %}
+            <table class="table" id="table_bon">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Product</th>
+                    <th>prix d'achat Ht</th>
+                    <th>Quantity</th>
+                    <th>Taux Remises</th>
+                    <th>Taux TVA</th>
+                    <th>Prix TTC</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for line in order_fournisseurs %}
+                    <tr>
+                        <td></td>
+                        <td>{{ line.product }}</td>
+                       <td>{{ line.product.regularPrice }}</td>
+                        <td>{{ line.quantity }}</td>
+                        <td>{{ line.tauxremise }} %</td>
+                        <td>{{ line.tauxtva }} %</td>
+                        <td>{{ line.total }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+{% endblock %}
+        {% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'order_fournisseur/javascript.html.twig' %}
+{% endblock %}
+
+

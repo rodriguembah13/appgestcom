@@ -1,0 +1,9 @@
+dashboard:
+  titre: Dashboard
+  sub_titre: tableau de bord
+  eleve: Students
+  professeur: Professeurs
+  classe: Class
+  eleve_inscrit: Registred students
+courbe:
+  titre: Effectifs des élèves et enseignants par classe

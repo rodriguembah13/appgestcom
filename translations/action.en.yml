@@ -1,0 +1,34 @@
+button:
+  new: Ajouter
+  edit: Editer
+  delete: Supprimer
+  import: Importer
+  export: Exporter
+  show: Detail
+  update: Modifier
+  cancel: Annuler
+  print: Imprimer
+  valide: Valider
+  search: Recherche
+  save: Enregistrer
+  timestable: Emplois de temps
+  affectation: Affectation
+  print_timestable: Imprimer emplois de temps
+  add_matiere: Ajouter une matière
+  add_trimestre: Ajouter un trimestre
+  add_sequence: Ajouter une évaluation
+  next: Suivant
+  activer: Activer
+  desactiver: Desactiver
+  pointage: Pointage
+inscription:
+  inscrire: Inscrire
+  sendsms: Envoyer un sms
+  sendmail: Envoyer un mail
+  absence: Absence
+  exclusion: Exclusion
+  transfert: Transférer
+  add_bourse: Ajouter une bourse
+  add_categorie_bourse: Ajouter une catégorie
+  certificat: 'Certificat de scolarite'
+

@@ -1,0 +1,34 @@
+product:
+  titre: Produits
+  new: Nouveau produit
+  import: Importer
+  table:
+    name: Nom produit
+    slug: slug
+    sku: Code produit
+    on_sale: Vendable
+    is_in_stock 	: est en stock
+    is_decomposable: Est decomposable
+    stockQuantity: Quantité en stock
+    salePrice: Prix de vente
+    MinQuantitySale: Minimum à vendre
+    MaxQuantitySale: maximuin à vendre
+    regularPrice: prix d'achat
+    Description: Description
+    supply: Fournisseur
+category:
+  titre: Categorie de produits
+  new: Nouvelle categorie
+  table:
+    name: Nom de la categorie
+    slug: slug
+    parentId: Id parent
+entrepot:
+  titre: Magasin
+  new: Nouveau Magasin
+  table:
+    name: Nom du magasin
+    phone: Téléphone
+    adresse: Adresse
+    director: Directeur
+

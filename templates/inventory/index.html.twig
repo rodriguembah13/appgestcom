@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'stock.table.inventory.titre'|trans({}, 'stock') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_actions %}
+    <div class="breadcrumb" style="top: 2px">
+        <div class="btn-group pull-right">
+            <a class="btn btn-success btn-sm" href="{{ path('inventory_new') }}" data-toggle="tooltip" data-placement="top" title="{{ 'stock.table.inventory.new'|trans({}, 'stock') }}"><i class="fa fa-plus"></i>{{ 'stock.table.inventory.new'|trans({}, 'stock') }}</a>
+            <a  class="btn btn-default btn-sm" href="#"><i class="fa fa-download"></i></a>
+        </div>
+    </div>
+{% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'stock.table.inventory.table.libelle'|trans({}, 'stock') }}</th>
+                <th>{{ 'stock.table.inventory.table.CreatedAt'|trans({}, 'stock') }}</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for inventory in inventories %}
+            <tr>
+                <td>{{ inventory.id }}</td>
+                <td>{{ inventory.libelle }}</td>
+                <td>{{ inventory.createdAt ? inventory.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="dropdown">
+
+                        <a href="#" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-arrow-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                   href="{{ path('inventory_show',{'id':inventory.id}) }}"><i
+                                            class="fa fa-eye"></i> {{ 'button.show'|trans({}, 'action') }}</a></li>
+                            <li><a class="dropdown-item" onclick='getItem_id({{ inventory.id }})' href="#"
+                                   id="delete_" data-toggle="modal" data-target="#deleteModa"><i
+                                            class="fa fa-trash"></i>{{ 'button.delete'|trans({}, 'action') }}</a></li>
+                            <li class="divider"></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+   {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {# {% include 'matiere/javascript.html.twig' %}#}
+{% endblock %}

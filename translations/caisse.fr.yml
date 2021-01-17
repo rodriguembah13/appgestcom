@@ -1,0 +1,27 @@
+customer:
+  titre: Clients
+  new: Nouveau clients
+  import: Importer
+  table:
+    firstname: Nom
+    lastname: Prenom
+    birthday: birthday
+    phone: Téléphone
+    website: Site web
+    company 	: Compagnie
+    email: email
+    Description: Description
+supplier:
+  titre: Fournisseur
+  new: Nouveau fournisseur
+  table:
+    name: Nom
+    lastname: Prenom
+    birthday: birthday
+    phone: Téléphone
+    website: Site web
+    company: Compagnie
+    email: email
+    Description: Description
+    adresse: 'adresse'
+

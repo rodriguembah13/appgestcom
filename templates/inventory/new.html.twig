@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'stock.table.inventory.new'|trans({}, 'stock') }}{% endblock %}
+{% block page_subtitle %}  {% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+
+   {# {{ include('inventory/_form.html.twig') }}#}
+            <table class="table" id="table_inventory">
+                <thead>
+                <tr>
+                    <th><input class="checkbox" type="checkbox" id="check_inv_all"/></th>
+                    <th>{{ 'stock.table.inventory.table.product'|trans({}, 'stock') }}</th>
+                    <th>{{ 'stock.table.inventory.table.quantity_stock'|trans({}, 'stock') }}</th>
+                    <th>{{ 'stock.table.inventory.table.quantity_real'|trans({}, 'stock') }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td><input class="checkbox" type="checkbox"/><span class="hidden">{{ product.id }}</span><span class="hidden">{{ product.slug }}</span></td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.stockQuantity}}</td>
+                        <td><input type="number"  id="{{ product.slug }}"/></td>
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="11">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endblock %}
+    {% block box_footer %}
+        <button class="btn btn-primary pull-right" id="save">{{ button_label|default('Save') }}</button>
+    {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+     {% include 'inventory/javascript.html.twig' %}#}
+{% endblock %}

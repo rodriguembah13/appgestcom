@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'product.titre'|trans({}, 'product') }}{% endblock %}
+{% block page_subtitle %} {{ 'product.sub_titre'|trans({}, 'product') }} {% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+    }%}
+        {% block box_body %}
+            <form class="form-horizontal" method="POST" action="{{ path('csv_data_process', {'id': csv_datum.id}) }}">
+{#
+                <input type="hidden" name="csv_data_file_id" value="{{ csv_datum[0]}}" />
+#}
+                <div class="table-responsive">
+                <table class="table">
+                    {% if csv_header_fields %}
+                    <tr>
+
+                        {% for csv_header_field in csv_header_fields %}
+                        <th>{{ csv_header_field }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% endif %}
+                   {# @foreach ($csv_data as $row)#}
+                    {% for csv_datum in csv_datums %}
+                    <tr>
+                       {# @foreach ($row as $key => $value)#}
+                        {% for row in csv_datum %}
+                        <td>{{ row }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                       {# @foreach ($csv_data[0] as $key => $value)#}
+                        {% for csv_datum in csv_header_fields %}
+                        <td>
+                            <select name="fields[{{ csv_datum }}]">
+                                {% for csvob in csv_header_fields_object %}
+                                <option value="{{ csvob}}"
+                                     {% if csv_datum == csvob   %}  selected {% endif %}>{{ csvob }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Import Data
+                </button>
+            </form>
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {# {% include 'matiere/javascript.html.twig' %}#}
+{% endblock %}

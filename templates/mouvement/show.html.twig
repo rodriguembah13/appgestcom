@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block page_title %}{{ 'stock.table.mouvement.titre'|trans({}, 'stock') }}{% endblock %}
+{% block page_subtitle %} {{ mouvement.libelle }} {% endblock %}
+{% block page_content %}
+<br>
+{% embed '@AdminLTE/Widgets/box-widget.html.twig'    with {
+    'boxtype' : 'success',
+    'solid' : 0,
+}%}
+        {% block box_body %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ mouvement.id }}</td>
+            </tr>
+            {% if mouvement.inStock %}
+                <tr>
+                    <th>In_quantity</th>
+                    <td>{{ mouvement.inQuantity }}</td>
+                </tr>
+            {% else %}
+            <tr>
+                <th>Out_quantity</th>
+                <td>{{ mouvement.outQuantity }}</td>
+            </tr>
+            {% endif %}
+
+            <tr>
+                <th>Entrepot</th>
+                <td>{{ mouvement.entrepot}}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ mouvement.createdAt ? mouvement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+            <h3>Produits</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Reference</th>
+        <th>Product</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for line in mouvement.mouvementLines %}
+    <tr>
+        <td>{{ line.product.sku }}</td>
+        <td>{{ line.product }}</td>
+        <td>{{ line.quantity }}</td>
+    </tr>
+    {% endfor %}
+    </tbody></table>
+        {% endblock %}
+{% endembed %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% include 'inventory/javascript.html.twig' %}#}
+{% endblock %}
+

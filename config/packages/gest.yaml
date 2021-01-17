@@ -1,0 +1,128 @@
+gest:
+  # --------------------------------------------------------------------------------
+  # PERMISSIONS
+  # --------------------------------------------------------------------------------
+  permissions:
+    # mapping complex rule sets of single permissions to named "sets" ("set name" = [array of "permissions and sets"])
+    sets:
+      PRODUCTS: [ 'view_product','create_product','import_product','delete_product','update_product' ]
+      ORDERS: [ 'view_order','create_order','import_order','delete_order','update_order' ]
+      USERS: [ 'view_user','create_user','delete_user','role_permissions' ]
+      CUSTOMERS: [ 'view_customer','create_customer','delete_customer','update_customer' ]
+      EMPLOYEE: [ 'view_employee','create_employee','delete_employee','update_employee' ]
+      ENTREPOT: [ 'view_entrepot','create_entrepot','delete_entrepot','update_entrepot' ]
+      SUPPLY: [ 'view_fournisseur','create_fournisseur','delete_fournisseur','update_fournisseur' ]
+      INVENTORY: [ 'view_inventory','create_inventory','delete_inventory','update_inventory' ]
+      MOUVEMENT: [ 'view_mouvement','create_mouvement','delete_mouvement','update_mouvement' ]
+      STOCK: [ 'view_stock','create_stock','delete_stock','update_stock' ]
+      CONFIGURATION: [ 'view_config','create_config','delete_config','edit_config' ]
+      # some single default definitions for roles
+      SINGLE_USER: [ 'view_dashbord','edit','details' ]
+      SINGLE_COMMERCIAL: [ 'view_dashbord','view_order','create_order','import_order' ]
+      # link above sets to one complete set for each user role
+      ROLE_USER: [ '@SINGLE_USER' ]
+      ROLE_COMMERCIAL: [ '@SINGLE_COMMERCIAL','@PRODUCTS' ]
+      ROLE_DIRECTOR: [ '@ROLE_USER','@USERS','@CUSTOMERS','@ORDERS','@PRODUCTS' ,'@STOCK','@MOUVEMENT','@INVENTORY','@SUPPLY','@EMPLOYEE']
+      ROLE_ADMIN: [ '@ROLE_DIRECTOR','@USERS','@EMPLOYEE','@ORDERS','@PRODUCTS' ]
+      ROLE_SUPER_ADMIN: [ '@ROLE_ADMIN','@USERS' ]
+      # mapping "sets" or permissions to user roles ("role name" = [array of "set names"])
+    maps:
+      ROLE_USER: [ 'ROLE_USER' ]
+      ROLE_COMMERCIAL: [ 'ROLE_USER' ]
+      ROLE_DIRECTOR: [ 'ROLE_COMMERCIAL' ]
+      ROLE_ADMIN: [ 'ROLE_ADMIN' ]
+      ROLE_SUPER_ADMIN: [ 'ROLE_SUPER_ADMIN' ]
+      # only here to register the (partially) unused permissions in the UI
+      # ROLE_FAKE: []
+      # add or remove single permissions
+    roles:
+      ROLE_USER: [ ]
+      ROLE_COMMERCIAL: [ ]
+      ROLE_DIRECTOR: [ ]
+      ROLE_ADMIN: [ ]
+      ROLE_SUPER_ADMIN: [ ]
+    # --------------------------------------------------------------------------------
+
+  # --------------------------------------------------------------------------------
+  # LANGUAGES
+  # Locale specific settings, like date formats
+  # --------------------------------------------------------------------------------
+  languages:
+    cs:
+      date_time_type: 'dd.MM.yyyy HH:mm'
+      date_type: 'dd.MM.yyyy'
+      date: 'd.m.Y'
+      date_time: 'd.m H:i'
+    da:
+      date_time_type: 'dd.MM.yyyy HH:mm'
+      date_type: 'dd.MM.yyyy'
+      date: 'd.m.Y'
+      date_time: 'd.m. H:i'
+    de:
+      date_time_type: 'dd.MM.yyyy HH:mm'
+      date_type: 'dd.MM.yyyy'
+      date: 'd.m.Y'
+      date_time: 'd.m. H:i'
+    de_CH:
+      date_time_type: 'dd.MM.yyyy HH:mm'
+      date_type: 'dd.MM.yyyy'
+      date: 'd.m.Y'
+      date_time: 'd.m. H:i'
+    en:
+      date_time_type: 'yyyy-MM-dd HH:mm'
+      date_type: 'yyyy-MM-dd'
+      date: 'Y-m-d'
+      date_time: 'm-d H:i'
+      duration: '%%h:%%m h'
+    es:
+      date_time_type: 'dd.MM.yyyy HH:mm'
+      date_type: 'dd.MM.yyyy'
+      date: 'd.m.Y'
+      date_time: 'd.m. H:i'
+    eu:
+      date_time_type: 'yyyy-MM-dd HH:mm'
+      date_type: 'yyyy-MM-dd'
+      date: 'Y-m-d'
+      date_time: 'm-d H:i'
+      duration: '%%h:%%m h'
+    fr:
+      date_time_type: 'dd/MM/yyyy HH:mm'
+      date_type: 'dd/MM/yyyy'
+      date: 'd/m/Y'
+      date_time: 'd/m H:i'
+      duration: '%%h h %%m'
+    hu:
+      date_time_type: 'yyyy.MM.dd. HH:mm'
+      date_type: 'yyyy.MM.dd.'
+      date: 'Y.m.d.'
+      date_time: 'm.d. H:i'
+    it:
+      date_time_type: 'dd.MM.yyyy HH:mm'
+      date_type: 'dd.MM.yyyy'
+      date: 'd.m.Y'
+      date_time: 'd.m. H:i'
+    nl:
+      date_time_type: 'dd.MM.yyyy HH:mm'
+      date_type: 'dd.MM.yyyy'
+      date: 'd.m.Y'
+      date_time: 'd.m. H:i'
+      duration: '%%hu%%m'
+    pt_BR:
+      date_time_type: 'dd-MM-yyyy HH:mm'
+      date_type: 'dd-MM-yyyy'
+      date: 'd-m-Y'
+      date_time: 'd-m H:i'
+    ru:
+      date_time_type: 'dd.MM.yyyy HH:mm'
+      date_type: 'dd.MM.yyyy'
+      date: 'd.m.Y'
+      date_time: 'd.m. H:i'
+    sk:
+      date_time_type: 'dd. MM. yyyy HH:mm'
+      date_type: 'dd. MM. yyyy'
+      date: 'd. m. Y'
+      date_time: 'd. m.  H:i'
+    sv:
+      duration: '%%h:%%m tim'
+  # --------------------------------------------------------------------------------
+
